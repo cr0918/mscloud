@@ -12,21 +12,20 @@ import org.springframework.web.client.RestTemplate;
 public class OrderController
 {
 
-    public static final String PaymentSrv_URL = "http://localhost:8001";
-
+    public static final String PAYMENT_SRV = "http://CLOUD-PAYMENT-SERVICE";
     @Autowired
     private RestTemplate restTemplate;
 
     @GetMapping("/consumer/payment/create") //客户端用浏览器是get请求，但是底层实质发送post调用服务端8001
     public CommonResult create(Payment payment)
     {
-        return restTemplate.postForObject(PaymentSrv_URL + "/payment/create",payment,CommonResult.class);
+        return restTemplate.postForObject(PAYMENT_SRV + "/payment/create",payment,CommonResult.class);
     }
 
 
     @GetMapping("/consumer/payment/get/{id}")
     public CommonResult getPayment(@PathVariable Long id)
     {
-        return restTemplate.getForObject(PaymentSrv_URL + "/payment/get/"+id, CommonResult.class, id);
+        return restTemplate.getForObject(PAYMENT_SRV + "/payment/get/"+id, CommonResult.class, id);
     }
 }
