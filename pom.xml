@@ -14,6 +14,7 @@
         <module>cloud-consumer-feign-order80</module>
         <module>cloud-provider-payment8003</module>
         <module>cloud-eureka-server7003</module>
+        <module>cloud-provider-hystrix-payment8001</module>
     </modules>
     <groupId>com.atguigu.springcloud</groupId>
     <artifactId>mscloud</artifactId>
@@ -126,9 +127,7 @@
                     <addResources>true</addResources>
                 </configuration>
             </plugin>
-
         </plugins>
     </build>
-
 
 </project>

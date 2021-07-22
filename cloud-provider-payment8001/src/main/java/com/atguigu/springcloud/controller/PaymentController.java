@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.concurrent.TimeUnit;
 
 @RestController
 @Slf4j
@@ -40,6 +41,11 @@ public class PaymentController
     {
         Payment payment = paymentService.getPaymentById(id);
         log.info("*****查询结果:{}",payment);
+        try {
+            TimeUnit.SECONDS.sleep(2);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         if (payment != null) {
             return new CommonResult(200,"查询成功"+"\t 服务端口："+serverPort,payment);
         }else{
