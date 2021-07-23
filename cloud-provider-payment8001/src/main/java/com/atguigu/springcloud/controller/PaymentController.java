@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 @RestController
@@ -41,15 +43,21 @@ public class PaymentController
     {
         Payment payment = paymentService.getPaymentById(id);
         log.info("*****查询结果:{}",payment);
-        try {
+       /* try {
             TimeUnit.SECONDS.sleep(2);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
+        }*/
         if (payment != null) {
             return new CommonResult(200,"查询成功"+"\t 服务端口："+serverPort,payment);
         }else{
             return new CommonResult(444,"没有对应记录,查询ID: "+id,null);
         }
+    }
+    @GetMapping(value = "/payment/lb")
+    public String paymentInfo(HttpServletRequest request)
+    {
+        System.out.println("*****lb from port: "+serverPort+"\t"+UUID.randomUUID().toString());
+        return serverPort+"\t"+ UUID.randomUUID().toString();
     }
 }
